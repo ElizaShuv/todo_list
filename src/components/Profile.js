@@ -1,62 +1,58 @@
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
-import './Components.css';
-const ProfileComponent = () => {
-    const onFinish = (values) => {
-        console.log('Received values of form: ', values);
+import React from 'react';
+import { Button, Card, Layout } from 'antd';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../slices/authSlice';
+import { useNavigate } from 'react-router-dom';
+
+const Profile = () => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { username, email } = useSelector((state) => state.auth.user);
+
+    const handleLogout = () => {
+        dispatch(logout());
+        navigate('/');
     };
+
     return (
-        <Form
-            name="normal_login"
-            className="login-form"
-            initialValues={{
-                remember: true,
-            }}
-            onFinish={onFinish}
-        >
-            <Form.Item
-                name="username"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your Username!',
-                    },
-                ]}
+        <Layout className="gradient-layout">
+            <div
+                style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
             >
-                <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
-            </Form.Item>
-            <Form.Item
-                name="password"
-                rules={[
-                    {
-                        required: true,
-                        message: 'Please input your Password!',
-                    },
-                ]}
-            >
-                <Input
-                    prefix={<LockOutlined className="site-form-item-icon" />}
-                    type="password"
-                    placeholder="Password"
-                />
-            </Form.Item>
-            <Form.Item>
-                <Form.Item name="remember" valuePropName="checked" noStyle>
-                    <Checkbox>Remember me</Checkbox>
-                </Form.Item>
-
-                <a className="login-form-forgot" href="">
-                    Forgot password
-                </a>
-            </Form.Item>
-
-            <Form.Item>
-                <Button type="primary" htmlType="submit" className="login-form-button">
-                    Log in
-                </Button>
-                Or <a href="">register now!</a>
-            </Form.Item>
-        </Form>
+                <Card
+                    hoverable
+                    style={{
+                        width: 500,
+                        margin: '50px auto',
+                    }}
+                >
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                        }}
+                    >
+                        <h2>Профиль</h2>
+                        <p>Логин: {username}</p>
+                        <p>Почта: {email}</p>
+                        <Button type="primary" onClick={handleLogout}
+                                style={{
+                                    background: 'black',
+                                    fontWeight: 'bold',
+                                }}
+                        >
+                            Выйти
+                        </Button>
+                    </div>
+                </Card>
+            </div>
+        </Layout>
     );
 };
-export default ProfileComponent;
+
+export default Profile;

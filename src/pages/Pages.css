@@ -1,0 +1,33 @@
+html, body, #root {
+    height: 100%;
+    margin: 0;
+}
+
+
+.gradient-layout {
+
+    height: 100%; /* Высота блока */
+    width: 100%; /* Длина блока */
+    background: rgb(2, 0, 36);
+    background: linear-gradient(
+            90deg,
+            rgba(2, 0, 36, 1) 0%,
+            rgba(0, 93, 55, 1) 28%,
+            rgba(49, 150, 101, 1) 48%,
+            rgba(255, 252, 252, 1) 84%
+    );
+    background-size: 400%;
+    animation: gradient 10s infinite linear;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 80% 0%;
+    }
+    50% {
+        background-position: 20% 100%;
+    }
+    100% {
+        background-position: 80% 0%;
+    }
+}
