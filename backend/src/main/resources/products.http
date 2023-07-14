@@ -1,0 +1,15 @@
+### Добавление книги
+POST localhost:8081/books
+Content-Type: application/json
+
+{
+  "name": "Анна Каренина",
+  "author": "Лев Толстой",
+  "year": 1877
+}
+
+### Получение списка книг
+GET localhost:8080/books
+
+### Удаление продукта по идентификатору
+DELETE localhost:8080/books/1
